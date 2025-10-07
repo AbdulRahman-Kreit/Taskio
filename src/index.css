@@ -1,0 +1,285 @@
+/* Start Variables */
+:root {
+    /* Colors */
+    --main-bg-color: #A2F7BA;
+    --alt-bg-color: #4d9663;
+    --main-font-color: white;
+    --checked-item-color: #666;
+    --edit-btn-color: hsl(203, 84%, 54%);
+    --edit-btn-color-hover: hsl(203, 84%, 44%);
+    --delete-btn-color: hsl(0, 88%, 57%);
+    --delete-btn-color-hover: hsl(0, 88%, 47%);
+    /* Radius */
+    --main-radius: 10px;
+    --secondary-raduis: 50px;
+    /* Transition Durations */
+    --main-t-duration: 0.3s;
+}
+/* Themes */
+[data-theme='dark'] {
+    --main-bg-color: #4d9663;
+    --alt-bg-color: #A2F7BA;
+    --main-font-color: white;
+}
+[data-theme='light'] {
+    --main-bg-color: #A2F7BA;
+    --alt-bg-color: #4d9663;
+    --main-font-color: white;
+}
+/* End Variables */
+/* Start global ruls */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html{
+    scroll-behavior: smooth;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Work Sans', sans-serif;
+    background-color: var(--main-bg-color);
+    transition: var(--main-t-duration);
+}
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+ul {
+    list-style: none;
+
+}
+.container{
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Small */
+@media (min-width: 768px) {
+    .container{
+        width: 750px;
+    }
+}
+/* Midium */
+@media (min-width: 992px) {
+    .container{
+        width: 970px;
+    }
+}
+/* Large */
+@media (min-width: 1200px) {
+    .container{
+        width: 1170px;
+    }
+}
+/* End global rules */
+/* Start MainScreen */
+/* Theme Switcher */
+.container .switchBox {
+    width: fit-content;
+    margin-top: 40px;
+}
+.container .switchBox .switch {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--alt-bg-color);
+    border-radius: var(--main-radius);
+    font-size: 1em;
+    font-weight: bold;
+    color: var(--main-bg-color);
+}
+/* Theme Switcher */
+.container .headerSection {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.container .headerSection .appTitle {
+    font-size: 4rem;
+    font-weight: bolder;
+    color: var(--main-font-color);
+}
+/* End MainScreen */
+/* Start TodoInput */
+.container .addingTasksContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+}
+.container .addingTasksContainer .TaskInput {
+    width: 65%;
+    padding: 15px;
+    border: 2px solid var(--alt-bg-color);
+    border-radius: var(--main-radius);
+    font-size: 1.2em;
+    color: var(--alt-bg-color);
+}
+.container .addingTasksContainer .TaskInput:focus {
+    outline: none;
+}
+.container .addingTasksContainer .buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 40px;
+    position: relative;
+}
+.container .addingTasksContainer .buttonContainer .addBtn,
+.container .addingTasksContainer .buttonContainer .filterBtn {
+    background-color: var(--main-font-color);
+    color: var(--main-bg-color);
+    font-size: 2rem;
+    text-align: center;
+    padding: 7.025px 18px;
+    margin: 0 20px;
+    border-radius: var(--main-radius);
+    transition: var(--main-t-duration);
+}
+.container .addingTasksContainer .buttonContainer .addBtn:hover,
+.container .addingTasksContainer .buttonContainer .filterBtn:hover {
+    background-color: var(--alt-bg-color);
+    color: var(--main-font-color);
+}
+.container .addingTasksContainer .buttonContainer .filterBtn {
+    position: relative;
+}
+/* Dropdown List */
+.container .addingTasksContainer .dropdownContainer {
+    position: absolute;
+    top: 100%;
+    right: 17px;
+    border-radius: var(--main-radius);
+    background-color: var(--alt-bg-color);
+    z-index: 1;
+}
+.container .addingTasksContainer .dropdownContainer .dropdownList {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+}
+.container .addingTasksContainer .dropdownContainer .dropdownItem {
+    padding: 12px;
+    width: 100%;
+    color: var(--main-font-color);
+    cursor: pointer;
+}
+.container .addingTasksContainer .dropdownContainer .dropdownItem:not(:last-child) {
+    border-bottom: 2px solid var(--checked-item-color);
+}
+.container .addingTasksContainer .dropdownContainer .dropdownItem input {
+    margin-right: 10px;
+}
+/* Dropdown List */
+/* End TodoInput */
+/* Start TodoList */
+.mainList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto;
+    padding: 0;
+    max-width: 1000px;
+}
+.mainList .listItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    padding: 0 15px;
+    width: 100%;
+    border-radius: var(--main-radius);
+    background-color: var(--main-font-color);
+}
+.mainList input {
+    cursor: pointer;
+}
+.mainList .listItem p {
+    display: inline-block;
+    font-size: 1em;
+    font-weight: bold;
+    margin-left: 25px;
+}
+.mainList .listItem .completed {
+    color: var(--checked-item-color);
+    text-decoration: line-through;
+}
+.mainList .listItem .controls i {
+    margin: 0 10px;
+    font-size: 1.2rem;
+    transition: var(--main-t-duration);
+}
+.mainList .listItem .controls .edit {
+    color: var(--edit-btn-color);
+}
+.mainList .listItem .controls .edit:hover {
+    color: var(--edit-btn-color-hover);
+}
+.mainList .listItem .controls .delete {
+    color: var(--delete-btn-color);
+}
+.mainList .listItem .controls .delete:hover {
+    color: var(--delete-btn-color-hover);
+}
+/* End TodoList */
+/* Start Responsive */
+/* Small Screens */
+@media (max-width: 767px) {
+    .container .switchBox .switch {
+        font-size: 0.8em;
+        padding: 7px;
+    }
+    .container .headerSection .appTitle {
+        font-size: 2rem;
+    }
+    .container .addingTasksContainer {
+        flex-direction: column;
+        margin: 20px auto;
+        width: 350px;
+    }
+    .container .addingTasksContainer .TaskInput {
+        width: 100%;
+        padding: 10px;
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+    .container .addingTasksContainer .buttonContainer {
+        width: 100%;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 0;
+        margin-left: 0;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+    .container .addingTasksContainer .buttonContainer .addBtn,
+    .container .addingTasksContainer .buttonContainer .filterBtn {
+        font-size: 1.5rem;
+    }
+}
+/* medium Screens */
+@media (max-width: 991px) {
+    .container .headerSection .appTitle {
+        font-size: 3rem;
+    }
+    .mainList .listItem {
+        width: 95%;
+    }
+}
+/* Large Screen */
+
+/* End Responsive */
