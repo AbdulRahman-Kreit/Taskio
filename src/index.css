@@ -118,16 +118,23 @@ ul {
     align-items: center;
     margin: 50px auto;
 }
-.container .addingTasksContainer .TaskInput {
+.container .addingTasksContainer .TaskInput,
+.container .addingTasksContainer .errorMsg {
     width: 65%;
     padding: 15px;
     border: 2px solid var(--alt-bg-color);
     border-radius: var(--main-radius);
     font-size: 1.2em;
+}
+.container .addingTasksContainer .TaskInput:focus,
+.container .addingTasksContainer .errorMsg:focus  {
+    outline: none;
+}
+.container .addingTasksContainer .TaskInput {
     color: var(--alt-bg-color);
 }
-.container .addingTasksContainer .TaskInput:focus {
-    outline: none;
+.container .addingTasksContainer .errorMsg {
+    color: red;
 }
 .container .addingTasksContainer .buttonContainer {
     display: flex;
@@ -196,6 +203,7 @@ ul {
     max-width: 1000px;
 }
 .mainList .listItem {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -206,7 +214,11 @@ ul {
     background-color: var(--main-font-color);
 }
 .mainList input {
+    position: absolute;
+    top: 30%;
+    left: 10px;
     cursor: pointer;
+
 }
 .mainList .listItem p {
     display: inline-block;
@@ -217,6 +229,10 @@ ul {
 .mainList .listItem .completed {
     color: var(--checked-item-color);
     text-decoration: line-through;
+}
+.mainList .listItem .controls {
+    display: flex;
+    flex-direction: row;
 }
 .mainList .listItem .controls i {
     margin: 0 10px;
@@ -251,7 +267,8 @@ ul {
         margin: 20px auto;
         width: 350px;
     }
-    .container .addingTasksContainer .TaskInput {
+    .container .addingTasksContainer .TaskInput,
+    .container .addingTasksContainer .errorMsg {
         width: 100%;
         padding: 10px;
         font-size: 1em;

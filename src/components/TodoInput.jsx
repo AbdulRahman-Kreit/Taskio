@@ -3,15 +3,19 @@ import { TaskContext } from '../contexts/TaskProvider';
 import Inputbuttons from './Inputbuttons';
 
 export default function TodoInput() {
-    const { taskValue, setTaskValue } = useContext(TaskContext);
+    const { taskValue, 
+            setTaskValue, 
+            inputPlaceholder, 
+            isInputErrorExist } = useContext(TaskContext);
     
     return (
         // Adding Tasks Container
         <div className='addingTasksContainer'>
-            <input value={taskValue} type="text" className='TaskInput' 
+            <input value={taskValue} type="text" 
+                className={isInputErrorExist === true ? 'errorMsg' : 'TaskInput'} 
                 onChange={(e) => {
                     setTaskValue(e.target.value)
-                }} placeholder='Enter a task to do...'/>
+                }} placeholder={inputPlaceholder}/>
                 <Inputbuttons />
         </div>
     )

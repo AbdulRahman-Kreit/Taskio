@@ -24,6 +24,9 @@ export default function TaskProvider({ children }) {
     const [filteredTasks, setFilteredTasks] = useState(getInitialTasks);
     const [taskValue, setTaskValue] = useState('');
     const [filter, setFilter] = useState(getInitialFilter);
+    const [inputPlaceholder, setInputPlaseholder] = useState('Enter a task to do...');
+    // For error message
+    const [isInputErrorExist, setIsInputErrorExist] = useState(false);
 
     const generateId = useId();
     
@@ -56,13 +59,22 @@ export default function TaskProvider({ children }) {
     // --- Handler Functions ---
     // Add a new tasks
     function handleAddTasks(newTaskText) {
-        const newTaskObject = {
-            id: generateId + '-' + tasks.length,
-            text: newTaskText,
-            isCompleted: false
-        };
-        const newTaskList = [...tasks, newTaskObject];
-        setTasks(newTaskList);
+        if (taskValue === '') {
+            setInputPlaseholder('Task name is required!');
+            console.error('Task name is required!');
+            setIsInputErrorExist(true);
+
+        }
+        else {
+            const newTaskObject = {
+                id: generateId + '-' + tasks.length,
+                text: newTaskText,
+                isCompleted: false
+            };
+            const newTaskList = [...tasks, newTaskObject];
+            setTasks(newTaskList);
+            setIsInputErrorExist(false);
+        }
     }
 
     // Check the task
@@ -108,7 +120,9 @@ export default function TaskProvider({ children }) {
             handleDeleteTask,
             filter,
             setFilter,
-            filteredTasks
+            filteredTasks,
+            inputPlaceholder,
+            isInputErrorExist
         }}>
             {children}
         </TaskContext.Provider>

@@ -3,7 +3,6 @@ import React, { useContext, useState, useRef, useEffect } from 'react'
 import { TaskContext } from '../contexts/TaskProvider';
 
 export default function Inputbuttons() {
-    // We no longer need `setTasks` here, as the Provider handles that.
     const { taskValue, setTaskValue, handleAddTasks, filter, setFilter } = useContext(TaskContext);
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef();
@@ -28,7 +27,6 @@ export default function Inputbuttons() {
     const dropdownItems = ['All Tasks', 'Complete Tasks', 'Incomplete Tasks'];
 
     const handleFilterChange = (selectedFilter) => {
-        // We simply tell the provider which filter to use.
         setFilter(selectedFilter);
         setIsOpen(false);
     };
