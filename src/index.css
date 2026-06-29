@@ -1,302 +1,257 @@
 /* Start Variables */
 :root {
-    /* Colors */
-    --main-bg-color: #A2F7BA;
-    --alt-bg-color: #4d9663;
-    --main-font-color: white;
-    --checked-item-color: #666;
-    --edit-btn-color: hsl(203, 84%, 54%);
-    --edit-btn-color-hover: hsl(203, 84%, 44%);
-    --delete-btn-color: hsl(0, 88%, 57%);
-    --delete-btn-color-hover: hsl(0, 88%, 47%);
-    /* Radius */
-    --main-radius: 10px;
-    --secondary-raduis: 50px;
-    /* Transition Durations */
+    /* Base Layout Radius & Transitions */
+    --main-radius: 5px;
+    --secondary-radius: 50px;
     --main-t-duration: 0.3s;
+    
+    /* Default to Dark Theme Colors */
+    --main-bg-color: #171823;
+    --box-bg-color: #25273d;
+    --main-font-color: #c8cbc5;
+    --input-placeholder: #767992;
+    --icon-color: #767992;
+    --checked-item-color: #4d5066;
+    --border-color: #393a4b;
+    --hover-font-color: #e3e4f1;
+    --bg-image: url('https://raw.githubusercontent.com/remojansen/logo.ts/master/images/bg-desktop-dark.jpg');
 }
-/* Themes */
+
+/* Themes Switching Management */
 [data-theme='dark'] {
-    --main-bg-color: #4d9663;
-    --alt-bg-color: #A2F7BA;
-    --main-font-color: white;
+    --main-bg-color: #171823;
+    --box-bg-color: #25273d;
+    --main-font-color: #c8cbc5;
+    --input-placeholder: #767992;
+    --checked-item-color: #4d5066;
+    --border-color: #393a4b;
+    --hover-font-color: #e3e4f1;
+    --bg-image: url('../src/assets/bg-desktop-dark.jpg');
+    --bg-mobile-image: url('../src/assets/bg-mobile-dark.jpg');
 }
+
 [data-theme='light'] {
-    --main-bg-color: #A2F7BA;
-    --alt-bg-color: #4d9663;
-    --main-font-color: white;
+    --main-bg-color: #fafafa;
+    --box-bg-color: #ffffff;
+    --main-font-color: #494c6b;
+    --input-placeholder: #9495a5;
+    --checked-item-color: #d1d2da;
+    --border-color: #e6e6e6;
+    --hover-font-color: #494c6b;
+    --bg-image: url('../src/assets/bg-desktop-light.jpg');
+    --bg-mobile-image: url('../src/assets/bg-mobile-light.jpg');
 }
 /* End Variables */
-/* Start global ruls */
+
+/* Start global rules */
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-html{
+html {
     scroll-behavior: smooth;
 }
 body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Josefin Sans', 'Roboto', sans-serif;
     background-color: var(--main-bg-color);
-    transition: var(--main-t-duration);
+    background-image: var(--bg-image);
+    background-repeat: no-repeat;
+    background-size: 100% 300px;
+    transition: background-color var(--main-t-duration), background-image var(--main-t-duration);
 }
 button {
     background: none;
     border: none;
     cursor: pointer;
+    padding: 0;
 }
 ul {
     list-style: none;
-
+    padding: 0;
+    margin: 0;
 }
-.container{
+.container {
+    width: 100%;
+    max-width: 700px;
     padding-left: 15px;
     padding-right: 15px;
     margin-left: auto;
     margin-right: auto;
 }
-/* Small */
-@media (min-width: 768px) {
-    .container{
-        width: 750px;
-    }
-}
-/* Midium */
-@media (min-width: 992px) {
-    .container{
-        width: 970px;
-    }
-}
-/* Large */
-@media (min-width: 1200px) {
-    .container{
-        width: 1170px;
-    }
-}
 /* End global rules */
-/* Start MainScreen */
-/* Theme Switcher */
-.container .switchBox {
-    width: fit-content;
-    margin-top: 40px;
-}
-.container .switchBox .switch {
-    width: 100%;
-    padding: 10px;
-    background-color: var(--alt-bg-color);
-    border-radius: var(--main-radius);
-    font-size: 1em;
-    font-weight: bold;
-    color: var(--main-bg-color);
-}
-/* Theme Switcher */
+
+/* Start MainScreen Header */
 .container .headerSection {
-    position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 75px;
+    margin-bottom: 40px;
 }
 .container .headerSection .appTitle {
-    font-size: 4rem;
-    font-weight: bolder;
-    color: var(--main-font-color);
-}
-/* End MainScreen */
-/* Start TodoInput */
-.container .addingTasksContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 50px auto;
-}
-.container .addingTasksContainer .TaskInput,
-.container .addingTasksContainer .errorMsg {
-    width: 65%;
-    padding: 15px;
-    border: 2px solid var(--alt-bg-color);
-    border-radius: var(--main-radius);
-    font-size: 1.2em;
-}
-.container .addingTasksContainer .TaskInput:focus,
-.container .addingTasksContainer .errorMsg:focus  {
-    outline: none;
-}
-.container .addingTasksContainer .TaskInput {
-    color: var(--alt-bg-color);
-}
-.container .addingTasksContainer .errorMsg {
-    color: red;
-}
-.container .addingTasksContainer .buttonContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 40px;
-    position: relative;
-}
-.container .addingTasksContainer .buttonContainer .addBtn,
-.container .addingTasksContainer .buttonContainer .filterBtn {
-    background-color: var(--main-font-color);
-    color: var(--main-bg-color);
-    font-size: 2rem;
-    text-align: center;
-    padding: 7.025px 18px;
-    margin: 0 20px;
-    border-radius: var(--main-radius);
-    transition: var(--main-t-duration);
-}
-.container .addingTasksContainer .buttonContainer .addBtn:hover,
-.container .addingTasksContainer .buttonContainer .filterBtn:hover {
-    background-color: var(--alt-bg-color);
-    color: var(--main-font-color);
-}
-.container .addingTasksContainer .buttonContainer .filterBtn {
-    position: relative;
-}
-/* Dropdown List */
-.container .addingTasksContainer .dropdownContainer {
-    position: absolute;
-    top: 100%;
-    right: 17px;
-    border-radius: var(--main-radius);
-    background-color: var(--alt-bg-color);
-    z-index: 1;
-}
-.container .addingTasksContainer .dropdownContainer .dropdownList {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 15px;
+    color: #ffffff;
     margin: 0;
 }
-.container .addingTasksContainer .dropdownContainer .dropdownItem {
-    padding: 12px;
+.container .headerSection .switch {
+    font-size: 1.6rem;
+    color: #ffffff;
+    transition: transform 0.2s ease;
+}
+.container .headerSection .switch:hover {
+    transform: rotate(15deg);
+}
+/* End MainScreen Header */
+
+/* Start TodoInput */
+.container .addingTasksContainer {
+    position: relative;
     width: 100%;
+    margin-bottom: 25px;
+}
+.container .addingTasksContainer input {
+    width: 600px;
+    padding: 18px 18px 18px 60px; 
+    background-color: var(--box-bg-color);
+    border: none;
+    border-radius: var(--main-radius);
+    font-size: 1.1rem;
     color: var(--main-font-color);
-    cursor: pointer;
+    font-family: 'Josefin Sans', sans-serif;
+    box-shadow: 0 35px 50px -15px rgba(0, 0, 0, 0.2);
 }
-.container .addingTasksContainer .dropdownContainer .dropdownItem:not(:last-child) {
-    border-bottom: 2px solid var(--checked-item-color);
+.container .addingTasksContainer input::placeholder {
+    color: var(--input-placeholder);
 }
-.container .addingTasksContainer .dropdownContainer .dropdownItem input {
-    margin-right: 10px;
+.container .addingTasksContainer input:focus {
+    outline: none;
 }
-/* Dropdown List */
+.container .addingTasksContainer::before {
+    content: "";
+    position: absolute;
+    left: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    z-index: 2;
+    pointer-events: none;
+}
+.container .addingTasksContainer .addBtn {
+    position: absolute;
+    left: 25.5px;
+    top: 50%;
+    color: var(--icon-color);
+    font-size: 17px;
+    transform: translateY(-50%);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 /* End TodoInput */
+
 /* Start TodoList */
 .mainList {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 30px auto;
-    padding: 0;
-    max-width: 1000px;
+    width: 100%;
+    background-color: var(--box-bg-color);
+    border-radius: var(--main-radius);
+    box-shadow: 0 35px 50px -15px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
 }
 .mainList .listItem {
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 15px 0;
-    padding: 0 15px;
-    width: 100%;
-    border-radius: var(--main-radius);
-    background-color: var(--main-font-color);
-}
-.mainList input {
-    position: absolute;
-    top: 30%;
-    left: 10px;
-    cursor: pointer;
-
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--box-bg-color);
+    transition: background-color var(--main-t-duration);
 }
 .mainList .listItem p {
-    display: inline-block;
-    font-size: 1em;
-    font-weight: bold;
-    margin-left: 25px;
+    margin: 0 0 0 45px;
+    font-size: 1.1rem;
+    color: var(--main-font-color);
+    font-weight: 400;
+    cursor: pointer;
 }
+
 .mainList .listItem .completed {
     color: var(--checked-item-color);
     text-decoration: line-through;
 }
+.mainList input[type="checkbox"] {
+    position: absolute;
+    top: 50%;
+    left: 22px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #a2f7ba; 
+}
 .mainList .listItem .controls {
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    gap: 15px;
 }
 .mainList .listItem .controls i {
-    margin: 0 10px;
-    font-size: 1.2rem;
-    transition: var(--main-t-duration);
+    font-size: 1.1rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity var(--main-t-duration);
 }
-.mainList .listItem .controls .edit {
-    color: var(--edit-btn-color);
+.mainList .listItem .controls i:hover {
+    opacity: 1;
 }
-.mainList .listItem .controls .edit:hover {
-    color: var(--edit-btn-color-hover);
-}
-.mainList .listItem .controls .delete {
-    color: var(--delete-btn-color);
-}
-.mainList .listItem .controls .delete:hover {
-    color: var(--delete-btn-color-hover);
-}
+.mainList .listItem .controls .edit { color: var(--icon-color); }
+.mainList .listItem .controls .delete { color: var(--icon-color); }
 /* End TodoList */
+
 /* Start Responsive */
-/* Small Screens */
 @media (max-width: 767px) {
-    .container .switchBox .switch {
-        font-size: 0.8em;
-        padding: 7px;
+    body {
+        background-image: var(--bg-mobile-image);
+    }
+    .container {
+        max-width: 375px;
+    }
+    .container .headerSection {
+        margin-top: 45px;
+        margin-bottom: 30px;
     }
     .container .headerSection .appTitle {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        letter-spacing: 10px;
     }
-    .container .addingTasksContainer {
-        flex-direction: column;
-        margin: 20px auto;
-        width: 350px;
-    }
-    .container .addingTasksContainer .TaskInput,
-    .container .addingTasksContainer .errorMsg {
+    .container .addingTasksContainer .TaskInput {
         width: 100%;
-        padding: 10px;
-        font-size: 1em;
-        margin-bottom: 10px;
+        padding: 15px 15px 15px 50px;
+        font-size: 0.95rem;
     }
-    .container .addingTasksContainer .buttonContainer {
-        width: 100%;
-        justify-content: space-between;
-        align-items: flex-end;
-        padding: 0;
-        margin-left: 0;
-        margin-top: 10px;
-        margin-bottom: 0;
-    }
-    .container .addingTasksContainer .buttonContainer .addBtn,
-    .container .addingTasksContainer .buttonContainer .filterBtn {
-        font-size: 1.5rem;
-    }
-}
-/* medium Screens */
-@media (max-width: 991px) {
-    .container .headerSection .appTitle {
-        font-size: 3rem;
+    .container .addingTasksContainer::before {
+        left: 18px;
     }
     .mainList .listItem {
-        width: 95%;
+        padding: 16px 20px;
+    }
+    .mainList .listItem p {
+        font-size: 0.95rem;
+        margin-left: 35px;
+    }
+    .mainList input[type="checkbox"] {
+        left: 18px;
     }
 }
-/* Large Screen */
-
 /* End Responsive */

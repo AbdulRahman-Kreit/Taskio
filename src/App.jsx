@@ -10,13 +10,11 @@ function App() {
   return (
     <ThemeProvider>
       <div className="container">
-        <div className="switchBox">
-          <ThemeSwitcher />
-        </div>
         <div className="headerSection">
             <h1 className="appTitle">
-                Taskio
+              Taskio
             </h1>
+            <ThemeSwitcher />
         </div>
         <TaskProvider>
           <TodoInput />

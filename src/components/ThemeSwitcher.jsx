@@ -2,11 +2,13 @@ import React, { useContext } from 'react'
 import { ThemeContext } from '../contexts/ThemeProvider'
 
 export default function ThemeSwitcher() {
-    const { toggleTheme } = useContext(ThemeContext);
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     return (
         <button onClick={toggleTheme} className='switch'>
-            Switch Theme
+            {theme === 'dark' ? 
+                <i className="fa-regular fa-sun"></i> : 
+                <i className="fa-regular fa-moon"></i>}
         </button>
     )
 }

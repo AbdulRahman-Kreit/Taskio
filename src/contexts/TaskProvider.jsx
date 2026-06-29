@@ -17,14 +17,14 @@ export default function TaskProvider({ children }) {
 
     const getInitialFilter = () => {
         const storedFilter = localStorage.getItem('filter');
-        return storedFilter || 'All Tasks';
+        return storedFilter || 'All';
     };
 
     const [tasks, setTasks] = useState(getInitialTasks);
     const [filteredTasks, setFilteredTasks] = useState(getInitialTasks);
     const [taskValue, setTaskValue] = useState('');
     const [filter, setFilter] = useState(getInitialFilter);
-    const [inputPlaceholder, setInputPlaseholder] = useState('Enter a task to do...');
+    const [inputPlaceholder, setInputPlaseholder] = useState('Currently typing...');
     // For error message
     const [isInputErrorExist, setIsInputErrorExist] = useState(false);
 
@@ -32,7 +32,6 @@ export default function TaskProvider({ children }) {
     
     // Effect handles saving both tasks and filter.
     useEffect(() => {
-        // Only save to localStorage if tasks or filter change.
         localStorage.setItem('tasks', JSON.stringify(tasks));
         localStorage.setItem('filter', filter);
     }, [tasks, filter]);
@@ -42,13 +41,13 @@ export default function TaskProvider({ children }) {
     useEffect(() => {
         let newFilteredTasks = [];
         switch (filter) {
-            case 'Complete Tasks':
+            case 'Completed':
                 newFilteredTasks = tasks.filter(task => task.isCompleted);
                 break;
-            case 'Incomplete Tasks':
+            case 'Active':
                 newFilteredTasks = tasks.filter(task => !task.isCompleted);
                 break;
-            case 'All Tasks':
+            case 'All':
             default:
                 newFilteredTasks = tasks;
                 break;
@@ -59,15 +58,14 @@ export default function TaskProvider({ children }) {
     // --- Handler Functions ---
     // Add a new tasks
     function handleAddTasks(newTaskText) {
-        if (taskValue === '') {
+        if (newTaskText.trim() === '') {
             setInputPlaseholder('Task name is required!');
             console.error('Task name is required!');
             setIsInputErrorExist(true);
-
         }
         else {
             const newTaskObject = {
-                id: generateId + '-' + tasks.length,
+                id: generateId + '-' + tasks.length + '-' + Date.now(),
                 text: newTaskText,
                 isCompleted: false
             };
@@ -108,6 +106,12 @@ export default function TaskProvider({ children }) {
         setTasks(newTaskList);
     }
 
+    // Clear all completed tasks
+    function handleClearCompleted() {
+        const activeTasks = tasks.filter(task => !task.isCompleted);
+        setTasks(activeTasks);
+    }
+
     return (
         <TaskContext.Provider value={{
             tasks,
@@ -118,6 +122,7 @@ export default function TaskProvider({ children }) {
             handleCheckTask,
             handleEditTask,
             handleDeleteTask,
+            handleClearCompleted,
             filter,
             setFilter,
             filteredTasks,
