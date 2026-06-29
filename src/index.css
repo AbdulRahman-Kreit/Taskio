@@ -134,25 +134,12 @@ ul {
 .container .addingTasksContainer input:focus {
     outline: none;
 }
-.container .addingTasksContainer::before {
-    content: "";
-    position: absolute;
-    left: 22px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    border: 1px solid var(--border-color);
-    border-radius: 50%;
-    z-index: 2;
-    pointer-events: none;
-}
 .container .addingTasksContainer .addBtn {
     position: absolute;
     left: 25.5px;
     top: 50%;
     color: var(--icon-color);
-    font-size: 17px;
+    font-size: 20px;
     transform: translateY(-50%);
     z-index: 10;
     display: flex;
