@@ -1,11 +1,8 @@
 /* Start Variables */
 :root {
-    /* Base Layout Radius & Transitions */
     --main-radius: 5px;
     --secondary-radius: 50px;
     --main-t-duration: 0.3s;
-    
-    /* Default to Dark Theme Colors */
     --main-bg-color: #171823;
     --box-bg-color: #25273d;
     --main-font-color: #c8cbc5;
@@ -136,7 +133,7 @@ ul {
 }
 .container .addingTasksContainer .addBtn {
     position: absolute;
-    left: 25.5px;
+    left: 1em;
     top: 50%;
     color: var(--icon-color);
     font-size: 20px;
@@ -204,15 +201,115 @@ ul {
 }
 .mainList .listItem .controls .edit { color: var(--icon-color); }
 .mainList .listItem .controls .delete { color: var(--icon-color); }
+.mainList .listItem .textBox {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.mainList .listItem .custom-checkbox {
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.mainList .listItem .custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.mainList .listItem .custom-checkbox .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border 0.2s;
+}
+
+.mainList .listItem:has(input:not(:checked)) .checkmark {
+    border: 1px solid var(--border-color);
+    background: transparent;
+}
+
+.mainList .listItem:has(input:checked) .checkmark {
+    border: none;
+    background: linear-gradient(135deg, #5df, #c058f3);
+}
+
+.mainList .listItem p {
+    margin: 0;
+    cursor: pointer;
+}
+
+.listFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    font-size: 0.9rem;
+    color: var(--input-placeholder);
+    border-top: 1px solid var(--border-color);
+    background-color: var(--box-bg-color);
+}
+
+.listFooter .filterButtons {
+    display: flex;
+    gap: 15px;
+}
+
+.listFooter .filterButtons button {
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.listFooter .filterButtons .filterBtnActive {
+    color: #3a7cfd;
+    font-weight: 700;
+}
+
+.listFooter .filterButtons .filterBtnInactive {
+    color: var(--input-placeholder);
+    font-weight: 400;
+}
+
+.listFooter .clearBtn {
+    color: var(--input-placeholder);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.listFooter .clearBtn:hover {
+    color: var(--hover-font-color);
+}
 /* End TodoList */
 
 /* Start Responsive */
 @media (max-width: 767px) {
     body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         background-image: var(--bg-mobile-image);
     }
     .container {
-        max-width: 375px;
+        max-width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
     }
     .container .headerSection {
         margin-top: 45px;
@@ -222,8 +319,8 @@ ul {
         font-size: 1.8rem;
         letter-spacing: 10px;
     }
-    .container .addingTasksContainer .TaskInput {
-        width: 100%;
+    .container .addingTasksContainer input {
+        width: 360px;
         padding: 15px 15px 15px 50px;
         font-size: 0.95rem;
     }
@@ -239,6 +336,17 @@ ul {
     }
     .mainList input[type="checkbox"] {
         left: 18px;
+    }
+    .mainList .listFooter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .mainList .listFooter span:first-child {
+        display: none;
+    }
+    .listFooter .clearBtn {
+        display: none;
     }
 }
 /* End Responsive */
