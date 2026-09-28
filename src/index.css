@@ -295,6 +295,17 @@ ul {
 .listFooter .clearBtn:hover {
     color: var(--hover-font-color);
 }
+
+.reorderLabel {
+    text-align: center;
+    margin-top: 45px;
+    margin-bottom: 40px;
+    color: var(--input-placeholder);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: -0.25px;
+    opacity: 0.85;
+}
 /* End TodoList */
 
 /* Start Responsive */
@@ -347,6 +358,11 @@ ul {
     }
     .listFooter .clearBtn {
         display: none;
+    }
+    .reorderLabel {
+        margin-top: 40px;
+        margin-bottom: 30px;
+        font-size: 0.85rem;
     }
 }
 /* End Responsive */

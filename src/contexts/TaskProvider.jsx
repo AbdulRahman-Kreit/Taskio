@@ -27,6 +27,7 @@ export default function TaskProvider({ children }) {
     const [inputPlaceholder, setInputPlaseholder] = useState('Currently typing...');
     // For error message
     const [isInputErrorExist, setIsInputErrorExist] = useState(false);
+    const [draggedIndex, setDraggedIndex] = useState(null);
 
     const generateId = useId();
     
@@ -57,7 +58,7 @@ export default function TaskProvider({ children }) {
     
     // --- Handler Functions ---
     // Add a new tasks
-    function handleAddTasks(newTaskText) {
+    const handleAddTasks = (newTaskText) => {
         if (newTaskText.trim() === '') {
             setInputPlaseholder('Task name is required!');
             console.error('Task name is required!');
@@ -76,7 +77,7 @@ export default function TaskProvider({ children }) {
     }
 
     // Check the task
-    function handleCheckTask(taskId) {
+    const handleCheckTask = (taskId) => {
         const updatedTasks = tasks.map(task => {
             if (task.id === taskId) {
                 return {
@@ -90,7 +91,7 @@ export default function TaskProvider({ children }) {
     }
 
     // Edit the task
-    function handleEditTask(taskId) {
+    const handleEditTask = (taskId) => {
         const taskToEdit = tasks.find(task => task.id === taskId);
         if (taskToEdit) {
             setTaskValue(taskToEdit.text);
@@ -99,7 +100,7 @@ export default function TaskProvider({ children }) {
     }
 
     // Delete the task
-    function handleDeleteTask(taskId) {
+    const handleDeleteTask = (taskId) => {
         const newTaskList = tasks.filter((task) => {
             return task.id !== taskId;
         });
@@ -107,9 +108,35 @@ export default function TaskProvider({ children }) {
     }
 
     // Clear all completed tasks
-    function handleClearCompleted() {
+    const handleClearCompleted = () => {
         const activeTasks = tasks.filter(task => !task.isCompleted);
         setTasks(activeTasks);
+    }
+
+    // Drag & drop task logic
+    const handleDragStart = (id) => {
+        setDraggedIndex(id);
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+    };
+
+    const handleDrop = (targetId) => {
+        if (draggedIndex === null || draggedIndex === targetId) return;
+
+        const draggedItemIndex = tasks.findIndex(task => task.id === draggedIndex);
+        const targetItemIndex = tasks.findIndex(task => task.id === targetId);
+
+        if (draggedItemIndex === -1 || targetItemIndex === -1) return;
+
+        const updatedTasks = [...tasks];
+
+        const [movedItem] = updatedTasks.splice(draggedItemIndex, 1);
+        updatedTasks.splice(targetItemIndex, 0, movedItem);
+
+        setDraggedIndex(null);
+        setTasks(updatedTasks);
     }
 
     return (
@@ -127,7 +154,10 @@ export default function TaskProvider({ children }) {
             setFilter,
             filteredTasks,
             inputPlaceholder,
-            isInputErrorExist
+            isInputErrorExist,
+            handleDragStart,
+            handleDragOver,
+            handleDrop,
         }}>
             {children}
         </TaskContext.Provider>
