@@ -1,4 +1,4 @@
-# 📝 Todo App (Task Manager)
+# 📝 Taskio
 
 A sleek, responsive, and feature-rich Todo Application built with **React** and **Context API**. This project allows users to manage their daily tasks efficiently with full persistence and theme customization.
 
